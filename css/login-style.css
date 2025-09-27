@@ -1,0 +1,56 @@
+.form {
+    width: 300px;
+    height: 500px;
+    background-color: rgb(127, 178, 255);
+    border-radius: 15px;
+    margin: auto;
+}
+
+.h1 {
+    margin-left: 100px;
+    padding-top: 20px;
+    margin-bottom: -10px;
+    font-family: "Sofia", sans-serif;
+    font-size: 30px;
+}
+
+.h3 {
+    margin-left: 48px;
+    padding-bottom: 30px;
+    font-family: 'Brush Script MT', cursive;
+
+}
+
+.accunt {
+    text-decoration: none;
+    color: crimson;
+}
+
+.name {
+    width: 80%;
+    margin-left: 32px;
+    border-radius: 5px;
+    border: 2px solid black;
+    box-sizing: border-box;
+}
+
+.submit {
+    margin-left: 75px;
+    margin-top: 20px;
+    border-radius: 5px;
+    width: 50%;
+}
+
+.pa{
+    margin-left: 70px;
+    margin-top: 40px;
+}
+
+.h3-2 {
+    margin-left: 55px;
+    padding-bottom: 30px;
+    margin-top: 30%;
+    font-family: 'Brush Script MT', cursive, ;
+    font-size: 20px;
+}
+
