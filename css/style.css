@@ -1,92 +1,105 @@
-*{
+* {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
-.navbar{
+.navbar {
     background-color: #0E3F19;
     display: flex;
     justify-content: space-evenly;
     color: white;
     align-items: center;
 }
-.Menu{
+
+.Menu {
     display: flex;
     gap: 2rem;
     list-style: none;
 }
-.box{
+
+.box {
     height: 2rem;
     position: relative;
     display: flex;
 }
-.search-img{
+
+.search-img {
     position: absolute;
     left: 7px;
     height: 96%;
     bottom: -1px;
 }
-.search-input{
+
+.search-input {
     height: 100%;
     background: transparent;
     border: 1px solid white;
     padding-left: 35px;
 }
-.search-select{
+
+.search-select {
     height: 100%;
     background: transparent;
-    color:inherit;
+    color: inherit;
     padding-inline: 1rem;
     border: 1px solid white;
 }
-.search-select option{
-  color: black;
+
+.search-select option {
+    color: black;
 }
-.menu2{
+
+.menu2 {
     display: flex;
     padding: 30px;
     gap: 1.5rem;
     font-size: 0.9rem;
 }
-.menu2 img{
+
+.menu2 img {
     transform: scale(1);
 }
-.num1{
+
+.num1 {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-}
-.num2{
-    display:flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-}
-.num3{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    
 }
 
-.badage{
+.num2 {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.num3 {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+}
+
+.badage {
     background-color: #EF7707;
     padding: 2rem 5rem;
 }
 
-.h1-badage{
+.h1-badage {
     font-size: 5rem;
     color: #0E3F19;
 }
-.p-badage{
+
+.p-badage {
     font-size: 1.5rem;
     color: #0E3F19;
     margin-top: 2rem;
 }
-.button-badage{
+
+.button-badage {
     background-color: #B4C8B1;
     font-size: 1rem;
     border-radius: 0.5rem;
@@ -97,7 +110,8 @@
     gap: 1rem;
     margin-top: 2rem;
 }
-.img-20-badage{
+
+.img-20-badage {
     position: relative;
     left: 0.5rem;
     right: 0;
@@ -106,21 +120,25 @@
     bottom: 22rem;
     width: 100%;
 }
-.img1{
-   width: 6rem;
+
+.img1 {
+    width: 6rem;
 }
-.s-badage{
-   position: absolute;
-   left: 50%;
-   top: 50%;
-   transform: translate(-50%,-50%);
+
+.s-badage {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
 }
-.img-fruit-badage{
+
+.img-fruit-badage {
     position: absolute;
     right: 0;
     bottom: 0;
     width: 30%;
 }
-.img2{
-    width:100%;
+
+.img2 {
+    width: 100%;
 }
