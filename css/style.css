@@ -100,7 +100,7 @@
 }
 
 .button-badage {
-    background-color: #B4C8B1;
+    background-color: rgb(215, 215, 215);
     font-size: 1rem;
     border-radius: 0.5rem;
     padding: 0.3rem 1rem;
@@ -119,6 +119,7 @@
     text-align: center;
     bottom: 22rem;
     width: 100%;
+    color: white;
 }
 
 .img1 {
@@ -141,4 +142,92 @@
 
 .img2 {
     width: 100%;
+}
+
+.title-mahcolat{
+    padding-left: 4.5rem;
+    padding-top: 3rem;
+    font-family: 'Brush Script MT', cursive;
+}
+
+.Show-More-one{
+    margin-right: 7rem;
+    float: right;
+    margin-top: -2.3rem;
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+    border-radius: 6px;
+    background-color:#FFC107 ;
+    font-family: 'Brush Script MT', cursive;
+    
+    
+}
+
+.div-asli{
+padding-top: 5%;
+
+}
+
+.div-asli-mahcolat{
+    width: 20%;
+    position: relative;
+    color: white;
+    padding: 0.5rem;
+    display: inline-block;
+    margin:10px ;
+    vertical-align: top;
+    height: 230px;
+    padding-left: 60px;
+    
+    
+}
+
+.buttom{
+position: relative;
+padding: 0.5rem;
+padding-left: 1rem;
+
+}
+
+.img-mahcol1{
+    position: absolute;
+    width: 100%;
+    border-radius: 1rem;
+    object-fit: cover;
+    height: 100%;
+}
+.hh4{
+  
+    color: #FFC107;
+    font-size: 1.5rem;
+    margin-top: 0px;
+    font-family: 'Brush Script MT', cursive;
+    font-style: initial;
+}
+.span{
+    width: 100%;
+    left: 2.1rem;
+    position: absolute;
+    background-color: #FFC107;
+    padding-left: 0px;
+    padding-right: 5px;
+    padding-bottom: 5px;
+    padding-top: 5px;
+    margin-left: 1px;
+    margin-top: 80px;
+    border-radius: 12px;
+    font-family: 'Brush Script MT', cursive;
+    
+}
+.p1{
+    margin-top: 5px;
+}
+.show{
+    padding-right: 10px;
+    
+}
+.main-mahcol{
+    background-color: white;
 }
