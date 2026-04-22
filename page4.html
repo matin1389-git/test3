@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <title>داستان ما</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html,
+        body {
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+        }
+
+        body {
+            font-family: 'Vazir', 'IRANSans', 'Tahoma', sans-serif;
+            background-color: #000;
+            direction: rtl;
+            opacity: 0;
+            animation: pageFadeIn 1.5s ease-in-out forwards;
+        }
+
+        @keyframes pageFadeIn {
+            0% {
+                opacity: 0;
+                transform: translateY(0);
+            }
+
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 10;
+            padding: 3px;
+        }
+
+        .glass-card {
+            background: rgba(0, 0, 0, 0.85);
+            border-radius: 25px;
+            padding: 20px 20px 20px 20px;
+            width: 98%;
+            max-width: 550px;
+            height: 99%;
+            text-align: center;
+            border: 2px solid #a0abb5;
+            box-shadow: 0 0 15px #c3cacf;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: center;
+            position: relative;
+        }
+
+        .lightgray-divider {
+            width: 125px;
+            height: 3px;
+            background: #bcc5cd;
+            border-radius: 3px;
+            margin: 5px auto 25px auto;
+        }
+
+        .tabs {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-bottom: 20px;
+            width: 100%;
+        }
+
+        .tab-btn {
+            background: transparent;
+            border: none;
+            padding: 8px 25px;
+            font-size: 0.9em;
+            font-family: inherit;
+            color: rgba(255, 255, 255, 0.753);
+            cursor: pointer;
+            border-radius: 30px;
+            transition: all 0.3s ease;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        .tab-btn.active {
+            background: #a0abb5;
+            color: #000;
+            font-weight: bold;
+        }
+
+        .tab-btn:active {
+            transform: scale(0.95);
+        }
+
+        .story-list {
+            width: 100%;
+            flex: 1;
+            overflow-y: auto;
+            padding: 5px 10px;
+            margin-top: 10px;
+        }
+
+        .story-item {
+            margin-bottom: 15px;
+            text-align: right;
+            border-right: 3px solid #a0abb5;
+            padding-right: 12px;
+        }
+
+        .story-title {
+            font-size: 0.9em;
+            color: #a0abb5;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .story-text {
+            font-size: 0.85em;
+            color: rgba(255, 255, 255, 0.9);
+            line-height: 1.6;
+            white-space: pre-line;
+        }
+
+        .story-list::-webkit-scrollbar {
+            width: 3px;
+        }
+
+        .story-list::-webkit-scrollbar-track {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+        }
+
+        .story-list::-webkit-scrollbar-thumb {
+            background: #a0abb5;
+            border-radius: 10px;
+        }
+
+        .nav-bar {
+            position: fixed;
+            bottom: 30px;
+            left: 0;
+            right: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 15px;
+            z-index: 20;
+            background: transparent;
+            padding: 8px 20px;
+            border-radius: 50px;
+            width: fit-content;
+            margin: 0 auto;
+        }
+
+        .nav-arrow {
+            background: none;
+            border: none;
+            font-size: 1.4em;
+            color: white;
+            cursor: pointer;
+            padding: 5px 10px;
+            transition: all 0.3s ease;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        .nav-arrow:active {
+            transform: scale(0.9);
+        }
+
+        .page-dots {
+            display: flex;
+            gap: 10px;
+        }
+
+        .dot {
+            font-size: 1.2em;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            color: rgba(255, 255, 255, 0.5);
+        }
+
+        .dot.active {
+            color: #00b4ff;
+            text-shadow: 0 0 5px #00b4ff;
+            transform: scale(1.2);
+            display: inline-block;
+        }
+
+        .dot:active {
+            transform: scale(0.9);
+        }
+
+        button,
+        .nav-arrow,
+        .dot,
+        .tab-btn {
+            -webkit-tap-highlight-color: transparent;
+            outline: none;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 12px;
+            }
+
+            .glass-card {
+                padding: 15px 12px;
+            }
+
+            .tab-btn {
+                padding: 6px 18px;
+                font-size: 0.8em;
+            }
+
+            .story-title {
+                font-size: 0.8em;
+            }
+
+            .story-text {
+                font-size: 0.9em;
+            }
+
+            .nav-bar {
+                bottom: 25px;
+                gap: 10px;
+                padding: 5px 12px;
+            }
+
+            .nav-arrow {
+                font-size: 1.2em;
+            }
+
+            .dot {
+                font-size: 1em;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="glass-card">
+            <div class="lightgray-divider"></div>
+
+            <div class="tabs">
+                <button class="tab-btn active" data-tab="1">1</button>
+                <button class="tab-btn" data-tab="2">2</button>
+                <button class="tab-btn" data-tab="3">3</button>
+                <button class="tab-btn" data-tab="4">4</button>
+                <button class="tab-btn" data-tab="5">5</button>
+            </div>
+
+            <div class="story-list" id="storyList"></div>
+        </div>
+    </div>
+
+    <div class="nav-bar">
+        <button class="nav-arrow" id="prevPage">❮</button>
+        <div class="page-dots">
+            <span class="dot" data-page="5">○</span>
+            <span class="dot active" data-page="4">●</span>
+            <span class="dot" data-page="3">○</span>
+            <span class="dot" data-page="2">○</span>
+            <span class="dot" data-page="1">○</span>
+        </div>
+        <button class="nav-arrow" id="nextPage">❯</button>
+    </div>
+
+    <script>
+        const storyByTab = {
+            1: [{
+                text: "آتش نیمه خاموش\nروزی که همه چیز شروع شد...\nنمیدونم از کجا شروع کنم. شاید از همون روز اول که چشمم به تو افتاد. روزی که هنوز نمیدونستم قراره چقدر وجود تو توی زندگی من مهم بشه.\nتو اومدی و من بدون اینکه بدونم، داشتم به چیزی خیره میشدم که بعدها تمام افکار من رو پر کرد.\nهمین ابتدا بود که فهمیدم این شروع یه داستان قشنگه، حتی اگه خودم نمیخواستم باور کنم.\nشاید باورت نشه، ولی از همون روز اول یه چیزی توی دلم گفت «این یکی فرق داره». راست میگفت. تو واقعاً با بقیه فرق داشتی.\nاون روزها برام تازگی داشت. هر بار که میدیدمت، انگار اولین بار بود. هر بار که صدات رو میشنیدم، دلم پر میکشید.\nنمیدونم چطور بگم، ولی تو اومدی و همه چی رو تو زندگی من تغییر دادی. حتی خودم رو.\nاز همون روزها بود که فهمیدم دیگه مثل سابق نیستم. دیگه نمیتونم بدون تو باشم. حتی اگه هنوز به خودم اعتراف نکرده بودم، قلبم میدونست.\nاین شروع یه قصه بود، قصه‌ای که هیچ کدوممون نمیدونستیم به کجا میرسه. ولی من از همون اول یه حس خوب داشتم. حس اینکه این یکی متفاوته. این یکی موندنیه."
+            }],
+            2: [{
+                text: "آتش نیمه خاموش\nروزهایی که بیشتر شناختمت...\nهر روز که میگذشت، بیشتر از قبل مجذوب تو میشدم. حرف زدنت، راه رفتنت، حتی سکوت کردنت برام جذاب بود.\nکمکم فهمیدم که تو فقط یه آدم معمولی نیستی. تو متفاوتی. تو اون شکلی هستی که من سالها دنبالش میگشتم.\nبا هر بار حرف زدن، با هر بار خندیدن، بیشتر به این نتیجه میرسم که آشنایی با تو یه اتفاق نبود، یه تقدیر بود.\nدوست داشتم هر روز بیشتر از دیروز باهات حرف بزنم، بیشتر بدونم، بیشتر بفهمم. و هر روز بیشتر از دیروز، به تو فکر میکردم.\nیادم میاد روزایی که ساعتها منتظر یه پیام کوتاه از تو بودم. روزایی که با یه «سلام» ساده، تمام روزم ساخته میشد.\nتو بدون اینکه بدونی،变成了 بخش بزرگی از زندگی من.变成了 دلیلی برای بیدار شدن، دلیلی برای بهتر بودن.\nهر چی بیشتر میگذشت، بیشتر میفهمیدم که تو فقط یه آدم نیستی. تو یه دنیایی. دنیایی که من توش گم میشدم، ولی نمیخواستم پیدام کنن.\nآشنایی با تو، بزرگترین اتفاق زندگیم بود. حتی اگه اون موقع نمیدونستم، الان میدونم. و این رو مدیون توام."
+            }],
+            3: [{
+                text: "آتش نیمه خاموش\nلحظه‌هایی که دلم به تو نزدیک شد...\nکمکم فاصله‌ها کمتر شد. دیگه فقط یه آشنای ساده نبودی. تو变成 قسمتی از روزمرگی من.\nصبحها به فکرت بیدار میشدم، شبها با یادت میخوابیدم. بدون اینکه بفهمم، تو رفته بودی توی عمق وجودم.\nنزدیک شدن به تو، ترسناک بود اما در عین حال، بهترین احساسی بود که توی عمرم تجربه کردم.\nهر روز که میگذشت، بیشتر از قبل مطمئن میشدم که تو اون کسی هستی که منتظرش بودم. همون کسی که نمیدونستم وجود داره، ولی همیشه آرزوش رو داشتم.\nیادم میاد اولین باری که حس کردم دلم داره برات میزنه. ترسیدم. نمیدونستم با این حس چیکار کنم. میخواستم فرار کنم، ولی نمیتونستم.\nتو مثل یه آهنربا بودی. هرچی بیشتر سعی میکردم دور بشم، بیشتر نزدیک میشدم. و این من رو دیوونه میکرد.\nنزدیک شدن به تو، بهم یاد داد که عشق فقط یه کلمه نیست. یه حس عمیقه که نمیشه با هیچ چیز دیگه مقایسه کرد.\nو من نزدیک شدم. نزدیکتر از اونی که فکرش رو میکردم. تا جایی که دیگه نتونستم انکار کنم. تا جایی که دیگه فراری وجود نداشت."
+            }],
+            4: [{
+                text: "آتش نیمه خاموش\nزیباترین روزهای زندگی...\nاوج داستان ما، جایی بود که دیگه نتونستم انکار کنم. دیگه نمیشد بگم «فقط یه دوست»، نمیشد بگم «اهمیت نداره».\nتو变成 ی زندگی من، نعمتیه که شاید هیچ وقت نتونم جبران کنم.\nهمونجا بود که تصمیم گرفتم تا آخرش بایستم. تا آخرش بجنگم. نه برای اینکه ثابت کنم چیزی رو، بلکه برای اینکه به تو بگم «تو ارزش همه اینا رو داری».\nاوج قصه مون، جایی بود که فهمیدم تو اون کسی هستی که میخوام. نه به خاطر شکل و قیافه‌ات، نه به خاطر حرف‌هایی که میزنی. به خاطر چیزی که وقتی کنارتم بهم میدی.\n\nبه من آرامش میدی. به من امید میدی. به من دلیلی برای ادامه دادن.\nتوی اوج، من دیگه نمیخواستم هیچ چیز دیگه‌ای. فقط تو رو میخواستم. فقط بودنت رو. فقط حضورت رو.\nو این بزرگترین حسی بود که توی عمرم تجربه کردم. حسی که هیچ کلمه‌ای نمیتونه توصیفش کنه."
+            }],
+            5: [{
+                text: "آتش نیمه خاموش\nحالا که به اینجا رسیدیم...\nاکه مطمئنم با تو، پر از لحظه‌های قشنگ و خاطره‌های شیرین خواهد بود.\nنمی‌دونم آینده چه چیزی برامون داره، اما این رو میدونم که تو همیشه توی قلبم میمونی.\nفرقی نداره کجا باشی یا چی کار کنی. این داستان ماست، و قراره همیشه ادامه داشته باشه.\nممنونم که هستی. ممنونم که اومد یه چیزی بهت بگم.استانی که هیچ وقت تموم نمیشه. چون عشق، پایان نداره.\nمن نمیدونم فردا چی میشه. نمیدونم سرنوشت برامون چی نوشته. ولی این رو میدونم که تو تا ابد توی قلب من میمونی.\nحتی اگه روزی از هم دور بشیم، حتی اگه زندگی راه خودش رو بره، تو همون کسی خواهی بود که توی قلبم جا داری.\nاین قشنگ‌ترین احساسیه که توی عمرم داشتم. و این رو مدیون توام.\nممنونم که اومدی. ممنونم که موندی. ممنونم که شدی اونی که همیشه میخواستم.\nدوستت دارم. نه به خاطر چیزی که هستی، به خاطر چیزی که وقتی کنارتم بهم میدی.\nو این تا همیشه ادامه داره. 💙"
+            }]
+        };
+        let currentTab = 1;
+        const storyList = document.getElementById('storyList');
+        const tabBtns = document.querySelectorAll('.tab-btn');
+
+        function loadStory(tabId) {
+            storyList.innerHTML = '';
+            const stories = storyByTab[tabId];
+            stories.forEach(story => {
+                const storyDiv = document.createElement('div');
+                storyDiv.className = 'story-item';
+                storyDiv.innerHTML = `
+            <div class="story-text">${story.text.replace(/\n/g, '<br>')}</div>
+        `;
+                storyList.appendChild(storyDiv);
+            });
+        }
+
+        function setActiveTab(tabId) {
+            tabBtns.forEach(btn => {
+                if (parseInt(btn.dataset.tab) === tabId) {
+                    btn.classList.add('active');
+                } else {
+                    btn.classList.remove('active');
+                }
+            });
+        }
+
+        tabBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                const tabId = parseInt(btn.dataset.tab);
+                if (tabId === currentTab) return;
+                currentTab = tabId;
+                setActiveTab(currentTab);
+                loadStory(currentTab);
+            });
+        });
+
+        loadStory(1);
+
+        const currentPage = 4;
+        const pages = ['First-page.html', 'page2.html', 'page3.html', 'page4.html', 'page5.html'];
+
+        function goToPage(pageNum) {
+            if (pageNum >= 1 && pageNum <= pages.length) {
+                document.body.style.transition = 'opacity 0.4s';
+                document.body.style.opacity = '0';
+                setTimeout(() => window.location.href = pages[pageNum - 1], 400);
+            }
+        }
+
+        document.getElementById('prevPage').addEventListener('click', () => {
+            if (currentPage < 5) goToPage(currentPage + 1);
+        });
+
+        document.getElementById('nextPage').addEventListener('click', () => {
+            if (currentPage > 1) goToPage(currentPage - 1);
+        });
+
+        document.querySelectorAll('.dot').forEach(dot => {
+            dot.addEventListener('click', () => {
+                const pageNum = parseInt(dot.dataset.page);
+                if (pageNum !== currentPage) goToPage(pageNum);
+            });
+        });
+    </script>
+</body>
+
+</html>

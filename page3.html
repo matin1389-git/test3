@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <title>شعر</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html,
+        body {
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+        }
+
+        body {
+            font-family: 'Vazir', 'IRANSans', 'Tahoma', sans-serif;
+            background-color: #000;
+            direction: rtl;
+            opacity: 0;
+            animation: pageFadeIn 1.5s ease-in-out forwards;
+        }
+
+        @keyframes pageFadeIn {
+            0% {
+                opacity: 0;
+                transform: translateY(0);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 10;
+            padding: 3px;
+        }
+
+        .glass-card {
+            background: rgba(0, 0, 0, 0.85);
+            border-radius: 25px;
+            padding: 20px 20px 20px 20px;
+            width: 98%;
+            max-width: 550px;
+            height: 99%;
+            text-align: center;
+            border: 2px solid #2ecc71;
+            box-shadow: 0 0 20px #2ecc71;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: center;
+            position: relative;
+        }
+
+        .green-divider {
+            width: 125px;
+            height: 3px;
+            background: #2ecc71;
+            border-radius: 3px;
+            margin: 5px auto 25px auto;
+        }
+
+        .tabs {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-bottom: 20px;
+            width: 100%;
+        }
+
+        .tab-btn {
+            background: transparent;
+            border: none;
+            padding: 8px 25px;
+            font-size: 0.9em;
+            font-family: inherit;
+            color: rgba(255, 255, 255, 0.6);
+            cursor: pointer;
+            border-radius: 30px;
+            transition: all 0.3s ease;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        .tab-btn.active {
+            background: #2ecc71;
+            color: #000;
+            font-weight: bold;
+        }
+
+        .tab-btn:active {
+            transform: scale(0.95);
+        }
+
+        .poems-list {
+            width: 100%;
+            flex: 1;
+            overflow-y: auto;
+            padding: 5px 10px;
+            margin-top: 10px;
+        }
+
+        .poem-item {
+            margin-bottom: 15px;
+            text-align: right;
+            border-right: 3px solid #2ecc71;
+            padding-right: 12px;
+        }
+
+        .poem-title {
+            font-size: 0.9em;
+            color: #2ecc71;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .poem-text {
+            font-size: 0.85em;
+            color: rgba(255, 255, 255, 0.9);
+            line-height: 1.6;
+            white-space: pre-line;
+        }
+
+        .poems-list::-webkit-scrollbar {
+            width: 3px;
+        }
+
+        .poems-list::-webkit-scrollbar-track {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+        }
+
+        .poems-list::-webkit-scrollbar-thumb {
+            background: #2ecc71;
+            border-radius: 10px;
+        }
+
+        .nav-bar {
+            position: fixed;
+            bottom: 30px;
+            left: 0;
+            right: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 15px;
+            z-index: 20;
+            background: transparent;
+            padding: 8px 20px;
+            border-radius: 50px;
+            width: fit-content;
+            margin: 0 auto;
+        }
+
+        .nav-arrow {
+            background: none;
+            border: none;
+            font-size: 1.4em;
+            color: white;
+            cursor: pointer;
+            padding: 5px 10px;
+            transition: all 0.3s ease;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        .nav-arrow:active {
+            transform: scale(0.9);
+        }
+
+        .page-dots {
+            display: flex;
+            gap: 10px;
+        }
+
+        .dot {
+            font-size: 1.2em;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            color: rgba(255, 255, 255, 0.5);
+        }
+
+        .dot.active {
+            color: #00b4ff;
+            text-shadow: 0 0 5px #00b4ff;
+            transform: scale(1.2);
+            display: inline-block;
+        }
+
+        .dot:active {
+            transform: scale(0.9);
+        }
+
+        button,
+        .nav-arrow,
+        .dot,
+        .tab-btn {
+            -webkit-tap-highlight-color: transparent;
+            outline: none;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 12px;
+            }
+            .glass-card {
+                padding: 15px 12px;
+            }
+            .tab-btn {
+                padding: 6px 18px;
+                font-size: 0.8em;
+            }
+            .poem-title {
+                font-size: 0.8em;
+            }
+            .poem-text {
+                font-size: 0.85em;
+            }
+            .nav-bar {
+                bottom: 25px;
+                gap: 10px;
+                padding: 5px 12px;
+            }
+            .nav-arrow {
+                font-size: 1.2em;
+            }
+            .dot {
+                font-size: 1em;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="glass-card">
+            <div class="green-divider"></div>
+
+            <div class="tabs">
+                <button class="tab-btn active" data-tab="1">🍃 بخش اول</button>
+                <button class="tab-btn" data-tab="2">🍃 بخش دوم</button>
+            </div>
+
+            <div class="poems-list" id="poemsList"></div>
+        </div>
+    </div>
+
+    <div class="nav-bar">
+        <button class="nav-arrow" id="prevPage">❮</button>
+        <div class="page-dots">
+            <span class="dot" data-page="5">○</span>
+            <span class="dot" data-page="4">○</span>
+            <span class="dot active" data-page="3">●</span>
+            <span class="dot" data-page="2">○</span>
+            <span class="dot" data-page="1">○</span>
+        </div>
+        <button class="nav-arrow" id="nextPage">❯</button>
+    </div>
+
+    <script>
+        const poemsByTab = {
+            1: [
+                { title: "🍃 قطعه اول", text: "مدتی هست به دلسوزی خودم مشغولم که \n دلم بند نفس های کسی هست،که نیست" },
+                { title: "🍃 قطعه دوم", text: "من تورا پاره‌ای از خود نه بلکه تمام وجود خود یافتم\n چنانکه اگر رنجی به تو رسد ، به من رسیده است" },
+                { title: "🍃 قطعه سوم", text: "دل‌ پاک همیشه شکسته است." },
+                { title: "🍃 قطعه چهارم", text: "در این دنیا نکردم من گناهی فقط کردم به چشمانت نگاهی\n نگاه من اگر باشد گناهی مجازاتم بکن هر کاری خواهی" },
+                { title: "🍃 قطعه پنجم", text: "چشم من،چشم تو را دید ولی ديده نشد\n من همانم که پسندید ولی پسندیده نشد" },
+                { title: "🍃 قطعه ششم", text: "بهترین غریبه‌ات می‌مانم \n ك تو را همیشه دوست خواهد داشت." },
+                { title: "🍃 قطعه هفتم", text: "بی حس بودنو از کسی یاد گرفتم\n که قشنگ ترین حسو بهش داشتم" }
+            ],
+            2: [
+                { title: "🍃 قطعه هشتم", text: "مثل عادت نیستی تا ساده انکارت کنم\n تو نفس های منی باید تکرارت کنم:)" },
+                { title: "🍃 قطعه نهم", text: "و اگر زندگی من یک کتاب بود\n صفحه‌ی تو گوشه ای خمیده داشت." },
+                { title: "🍃 قطعه دهم", text: "دردها پایان پیدا میکند با پایان یافتن فکرهایت." },
+                { title: "🍃 قطعه یازدهم", text: "شعر هایم‌ همگی ، ترجمه‌ی دلتنگیست . . \nبی او دلتنگ ترین‌ شاعر تاریخ ‌، منم . ." },
+                { title: "🍃 قطعه دوازدهم", text: "عشق حد وسط ندارد\n یا نابودت می‌کند یا نجاتت می‌دهد." },
+                { title: "🍃 قطعه سیزدهم", text: "من غم دارم اندازه ی زیبایی تو" },
+                { title: "🍃 قطعه چهاردهم", text: "گاه باید گذشته را یاد کرد\n تا محکوم به تکرار آن نشوی." }
+            ]
+        };
+
+        let currentTab = 1;
+        const poemsList = document.getElementById('poemsList');
+        const tabBtns = document.querySelectorAll('.tab-btn');
+
+        function loadPoems(tabId) {
+            poemsList.innerHTML = '';
+            const poems = poemsByTab[tabId];
+            poems.forEach(poem => {
+                const poemDiv = document.createElement('div');
+                poemDiv.className = 'poem-item';
+                poemDiv.innerHTML = `
+                    <div class="poem-title">${poem.title}</div>
+                    <div class="poem-text">${poem.text.replace(/\n/g, '<br>')}</div>
+                `;
+                poemsList.appendChild(poemDiv);
+            });
+        }
+
+        function setActiveTab(tabId) {
+            tabBtns.forEach(btn => {
+                if (parseInt(btn.dataset.tab) === tabId) {
+                    btn.classList.add('active');
+                } else {
+                    btn.classList.remove('active');
+                }
+            });
+        }
+
+        tabBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                const tabId = parseInt(btn.dataset.tab);
+                if (tabId === currentTab) return;
+                currentTab = tabId;
+                setActiveTab(currentTab);
+                loadPoems(currentTab);
+            });
+        });
+
+        loadPoems(1);
+
+        const currentPage = 3;
+        const pages = ['First-page.html', 'page2.html', 'page3.html', 'page4.html', 'page5.html'];
+
+        function goToPage(pageNum) {
+            if (pageNum >= 1 && pageNum <= pages.length) {
+                document.body.style.transition = 'opacity 0.4s';
+                document.body.style.opacity = '0';
+                setTimeout(() => window.location.href = pages[pageNum - 1], 400);
+            }
+        }
+
+      document.getElementById('prevPage').addEventListener('click', () => {
+            if (currentPage < 5) goToPage(currentPage + 1);
+        });
+
+        document.getElementById('nextPage').addEventListener('click', () => {
+            if (currentPage > 1) goToPage(currentPage - 1);
+        });
+
+        document.querySelectorAll('.dot').forEach(dot => {
+            dot.addEventListener('click', () => {
+                const pageNum = parseInt(dot.dataset.page);
+                if (pageNum !== currentPage) goToPage(pageNum);
+            });
+        });
+    </script>
+</body>
+
+</html>

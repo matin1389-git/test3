@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <title>راهنما</title>
+    <style>
+        body {
+            opacity: 0;
+            animation: pageFadeIn 2s ease-in-out forwards;
+        }
+
+        @keyframes pageFadeIn {
+            0% {
+                opacity: 0;
+                transform: translateY(0);
+            }
+
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html,
+        body {
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+        }
+
+        body {
+            font-family: 'Tahoma', sans-serif;
+            background-color: #000;
+            direction: rtl;
+        }
+
+        /* ستاره‌های پس‌زمینه */
+        .stars {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: transparent;
+            z-index: 0;
+            overflow: hidden;
+        }
+
+        .star {
+            position: absolute;
+            background: #FFF;
+            border-radius: 50%;
+            box-shadow: 0 0 8px #FFF, 0 0 15px #FFF, 0 0 25px #FFF, 0 0 35px #00FFFF, 0 0 45px #00FFFF;
+            animation: twinkle linear infinite;
+        }
+
+        @keyframes twinkle {
+
+            0%,
+            100% {
+                opacity: 0.9;
+            }
+
+            50% {
+                opacity: 0.3;
+            }
+        }
+
+        /* کانتینر اصلی */
+        .container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 2;
+            padding: 20px;
+        }
+
+        /* کادر شیشه‌ای */
+        .glass-card {
+            background: rgba(0, 0, 0, 0.674);
+            backdrop-filter: blur(50px);
+            border-radius: 25px;
+            padding: 40px 30px;
+            width: 95%;
+            height: 84.5%;
+            max-width: 500px;
+            text-align: center;
+            border: 0.2px solid rgba(0, 150, 255, 0.6);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5), 0 0 15px rgba(0, 150, 255, 0.3);
+        }
+
+        /* عنوان */
+        .title {
+            color: white;
+            font-size: 1.8em;
+            margin-bottom: 25px;
+            font-weight: bold;
+            letter-spacing: 2px;
+        }
+
+        /* لیست نکات */
+        .tips-list {
+            text-align: right;
+            margin-bottom: 35px;
+        }
+
+        .tip-item {
+            color: white;
+            font-size: 1.1em;
+            line-height: 2.2;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 5px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .tip-icon {
+            font-size: 1.4em;
+            min-width: 40px;
+        }
+
+        .tip-text {
+            text-align: right;
+        }
+
+        /* دکمه شروع */
+        .start-btn {
+            background-color: #1da9f9;
+            color: rgb(243, 243, 243);
+            border: none;
+            padding: 14px 40px;
+            font-size: 1.2em;
+            font-family: 'Tahoma', sans-serif;
+            border-radius: 50px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(27, 200, 253, 0.4);
+            margin-top: 10px;
+        }
+
+        .start-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 6px 20px rgba(255, 107, 107, 0.6);
+        }
+
+        .start-btn:active {
+            transform: scale(0.98);
+        }
+
+        button {
+            -webkit-tap-highlight-color: transparent;
+            outline: none;
+        }
+
+
+        /* استایل موبایل */
+        @media (max-width: 768px) {
+            .glass-card {
+                padding: 25px 20px;
+            }
+
+            .title {
+                font-size: 1.5em;
+            }
+
+            .tip-item {
+                font-size: 0.95em;
+                line-height: 2;
+            }
+
+            .tip-icon {
+                font-size: 1.2em;
+                min-width: 35px;
+            }
+
+            .start-btn {
+                padding: 12px 30px;
+                font-size: 1.1em;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="stars"></div>
+
+    <div class="container">
+        <div class="glass-card">
+            <div class="title">راهنما</div>
+
+            <div class="tips-list">
+                <div class="tip-item">
+                    <span class="tip-icon">💖</span>
+                    <span class="tip-text">این سایت فقط مال توئه... و فقط ۱ ماه دووم داره</span>
+                </div>
+                <div class="tip-item">
+                    <span class="tip-icon">📖</span>
+                    <span class="tip-text">این سایت به جز صفحه ورود و راهنما دارای 5 صفحه است</span>
+                </div>
+                <div class="tip-item">
+                    <span class="tip-icon">💎</span>
+                    <span class="tip-text">پایین هر صفحه،دکمه قبلی و بعدی کمکت می‌کنه تا بین صفحات جابه جا بشی</span>
+                </div>
+                <div class="tip-item">
+                    <span class="tip-icon">🌸</span>
+                    <span class="tip-text">خواهشا تا آخرین صفحه سایت برو</span>
+                </div>
+                 <div class="tip-item">
+                    <span class="tip-icon">🌙</span>
+                    <span class="tip-text">امکان دانلود وجود نداره</span>
+                </div>
+                 <div class="tip-item">
+                    <span class="tip-icon">💖</span>
+                    <span class="tip-text">بعد از 1 ماه همه ی داده های سایت از بین خواهد رفت</span>
+                </div>
+                 <div class="tip-item">
+                    <span class="tip-icon">🎁</span>
+                    <span class="tip-text">کلیک کن رو دکمه تا شروع بشه</span>
+                </div>
+            </div>
+
+            <button class="start-btn" id="startBtn">شروع کن 🎂</button>
+        </div>
+    </div>
+
+    <script>
+        // دکمه شروع
+        document.getElementById('startBtn').addEventListener('click', function () {
+            window.location.href = 'First-page.html';
+        });
+
+        // ========== تنظیم ستاره‌ها ==========
+        function setupStars() {
+            const starsContainer = document.querySelector('.stars');
+            const numberOfStars = 125;
+            starsContainer.innerHTML = '';
+            for (let i = 0; i < numberOfStars; i++) {
+                const star = document.createElement('div');
+                star.classList.add('star');
+                star.style.top = `${Math.random() * 100}%`;
+                star.style.left = `${Math.random() * 100}%`;
+                const minSize = 1.5;
+                const maxSize = 4;
+                const starSize = Math.random() * (maxSize - minSize) + minSize;
+                star.style.width = `${starSize}px`;
+                star.style.height = `${starSize}px`;
+                const twinkleDuration = Math.random() * 3 + 1;
+                star.style.animationDuration = `${twinkleDuration}s`;
+                starsContainer.appendChild(star);
+            }
+        }
+
+        setupStars();
+        window.addEventListener('resize', setupStars);
+    </script>
+</body>
+
+</html>

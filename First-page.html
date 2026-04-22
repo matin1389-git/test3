@@ -1,0 +1,500 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <title>تبریک تولد</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html,
+        body {
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+        }
+
+        body {
+            font-family: 'Vazir', 'IRANSans', 'Tahoma', sans-serif;
+            background-color: #000;
+            direction: rtl;
+            opacity: 0;
+            animation: pageFadeIn 1.5s ease-in-out forwards;
+        }
+
+        @keyframes pageFadeIn {
+            0% {
+                opacity: 0;
+                transform: translateY(0);
+            }
+
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* بادکنک‌ها با نخ */
+        .balloon-wrapper {
+            position: fixed;
+            bottom: -100px;
+            z-index: 4;
+            pointer-events: none;
+            animation: floatUp 8s ease-in infinite;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .balloon {
+            font-size: 40px;
+        }
+
+        .string {
+            width: 2px;
+            height: 40px;
+            background: linear-gradient(to bottom, #888, #ccc);
+            margin-top: -5px;
+        }
+
+        @keyframes floatUp {
+            0% {
+                bottom: -100px;
+                opacity: 1;
+            }
+
+            80% {
+                opacity: 1;
+            }
+
+            100% {
+                bottom: 110%;
+                opacity: 0;
+            }
+        }
+
+        /* کادر شیشه‌ای */
+        .container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 10;
+            padding: 3px;
+        }
+
+        .glass-card {
+            background: rgba(0, 0, 0, 0.85);
+            border-radius: 25px;
+            padding: 35px 20px 50px 20px;
+            width: 98%;
+            max-width: 550px;
+            height: 99%;
+            text-align: center;
+            border: 2px solid rgba(0, 149, 255, 0.712);
+            box-shadow: 0 0 20px rgba(0, 145, 248, 0.712);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: 20px;
+            position: relative;
+        }
+
+        /* ثانیه‌شمار معکوس */
+        .countdown-box {
+            background: transparent;
+            border: none;
+            padding: 10px 15px;
+            margin-bottom: 5px;
+            width: 100%;
+            position: relative;
+            top: -175px;
+        }
+
+        .countdown {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .countdown-item {
+            font-size: 1em;
+            color: #ffffff;
+            background: rgba(0, 0, 0, 0.5);
+            padding: 5px 8px;
+            border-radius: 10px;
+            min-width: 65px;
+        }
+
+        .countdown-item span {
+            font-size: 1.3em;
+            font-weight: bold;
+            color: #00b4ff;
+        }
+
+        .birthday-title {
+            font-size: 2.5em;
+            color: #ffd700;
+            letter-spacing: 2px;
+            font-family: 'Georgia', 'Times New Roman', serif;
+            text-align: center;  
+        }
+
+        .birthday-message {
+            font-size: 1.3em;
+            color: white;
+            line-height: 1.8;
+            padding: 0 10px;
+            text-align: center;
+        }
+
+        /* دکمه پاکت نامه */
+        .envelope-btn {
+            background: none;
+            border: none;
+            font-size: 55px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            -webkit-tap-highlight-color: transparent;
+            margin-top: 10px;
+        }
+
+        .envelope-btn:active {
+            transform: scale(0.9);
+        }
+
+        /* مودال نامه */
+        .modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.95);
+            z-index: 200;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            visibility: hidden;
+            opacity: 0;
+            transition: all 0.3s ease;
+        }
+
+        .modal.show {
+            visibility: visible;
+            opacity: 1;
+        }
+
+        .letter-paper {
+            background: #fff8e7;
+            padding: 30px;
+            border-radius: 15px;
+            width: 85%;
+            max-width: 400px;
+            text-align: center;
+            color: #333;
+            font-family: 'Vazir', 'IRANSans', 'Tahoma', sans-serif;
+            position: relative;
+            box-shadow: 0 0 30px rgba(0, 0, 0, 0.5);
+        }
+
+        .close-letter {
+            position: absolute;
+            top: 10px;
+            left: 15px;
+            font-size: 24px;
+            cursor: pointer;
+            color: #333;
+            -webkit-tap-highlight-color: transparent;
+            outline: none;
+        }
+
+        .envelope-btn,
+        .nav-arrow,
+        .dot,
+        .close-letter {
+            -webkit-tap-highlight-color: transparent;
+            outline: none;
+        }
+
+        /* نوار ناوبری */
+        .nav-bar {
+            position: fixed;
+            bottom: 30px;
+            left: 0;
+            right: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 15px;
+            z-index: 20;
+            background: transparent;
+            padding: 8px 20px;
+            border-radius: 50px;
+            width: fit-content;
+            margin: 0 auto;
+        }
+
+        .nav-arrow {
+            background: none;
+            border: none;
+            font-size: 1.4em;
+            color: white;
+            cursor: pointer;
+            padding: 5px 10px;
+            transition: all 0.3s ease;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        .nav-arrow:active {
+            transform: scale(0.9);
+        }
+
+        .page-dots {
+            display: flex;
+            gap: 10px;
+        }
+
+        .dot {
+            font-size: 1.2em;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            color: rgba(255, 255, 255, 0.5);
+        }
+
+        .dot.active {
+            color: #00b4ff;
+            text-shadow: 0 0 5px #00b4ff;
+            transform: scale(1.2);
+            display: inline-block;
+        }
+
+        .dot:active {
+            transform: scale(0.9);
+        }
+
+        /* موبایل */
+        @media (max-width: 768px) {
+            .container {
+                padding: 12px;
+            }
+
+            .glass-card {
+                padding: 20px 12px;
+                gap: 15px;
+            }
+
+            .birthday-title {
+                font-size: 1.8em;
+            }
+
+            .birthday-message {
+                font-size: 1em;
+            }
+
+            .nav-bar {
+                bottom: 25px;
+                gap: 10px;
+                padding: 5px 12px;
+            }
+
+            .nav-arrow {
+                font-size: 1.2em;
+            }
+
+            .dot {
+                font-size: 1em;
+            }
+
+            .envelope-btn {
+                font-size: 50px;
+            }
+
+            .countdown-item {
+                font-size: 0.8em;
+                min-width: 55px;
+                padding: 3px 6px;
+            }
+
+            .countdown-item span {
+                font-size: 1.1em;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="glass-card">
+            <!-- ثانیه‌شمار معکوس -->
+            <div class="countdown-box">
+                <div class="countdown" id="countdown">
+                    <span class="countdown-item"><span id="days">00</span> روز</span>
+                    <span class="countdown-item"><span id="hours">00</span> ساعت</span>
+                    <span class="countdown-item"><span id="minutes">00</span> دقیقه</span>
+                    <span class="countdown-item"><span id="seconds">00</span> ثانیه</span>
+                </div>
+            </div>
+
+            <div class="birthday-title">Happy Birthday</div>
+            <div class="birthday-message" id="birthdayMessage">
+                986 روز پیش ذهن مرا یک بیگ بنگ داد.<br>
+                شاید هیچوقت اینکارم درک نشه<br>
+                ولی خوشحالم اینکارو انجام دادم<br>
+                هدفم اینه اهمیت رو حس کنی<br>
+                امیدوارم بتونم برای لحظه ای لبخند<br>روی لبات بیارم زیبا روی<br>
+                تولدت مبارک ای بیگ بنگ.
+            </div>
+
+            <!-- دکمه پاکت نامه -->
+            <button class="envelope-btn" id="envelopeBtn">📩</button>
+        </div>
+    </div>
+
+    <!-- مودال نامه -->
+    <div class="modal" id="letterModal">
+        <div class="letter-paper">
+            <span class="close-letter" id="closeLetter">&times;</span>
+            <h3 style="margin-bottom: 15px;">❤️ برای باران عزیز ❤️</h3>
+            <p style="line-height: 1.8;">
+                این چند خط را نوشتم تا بدانی...<br>
+                درسته که مسیر من به پایان رسید<br>
+                ولی همیشه به فکرت هستم.<br>
+                شاید نتونم کنارت باشم<br>
+                اما همیشه در قلبم هستی.<br>
+            </p>
+        </div>
+    </div>
+
+    <!-- نوار ناوبری -->
+    <div class="nav-bar">
+        <button class="nav-arrow" id="prevPage">❮</button>
+        <div class="page-dots" id="pageDots">
+            <span class="dot" data-page="5">○</span>
+            <span class="dot" data-page="4">○</span>
+            <span class="dot" data-page="3">○</span>
+            <span class="dot" data-page="2">○</span>
+            <span class="dot active" data-page="1">●</span>
+        </div>
+        <button class="nav-arrow" id="nextPage">❯</button>
+    </div>
+
+    <script>
+        // ========== بادکنک‌ها ==========
+        const balloonColors = ['🔴', '🔵', '🔴', '🔵', '🔴', '🔵', '🔴', '🔵'];
+        const spacing = 12;
+        for (let i = 0; i < balloonColors.length; i++) {
+            const wrapper = document.createElement('div');
+            wrapper.className = 'balloon-wrapper';
+            const leftPosition = (i * spacing) + (spacing / 2);
+            wrapper.style.left = leftPosition + '%';
+            wrapper.style.animationDelay = (i * 0.5) + Math.random() * 1 + 's';
+            wrapper.style.animationDuration = 6 + Math.random() * 3 + 's';
+            const balloon = document.createElement('div');
+            balloon.className = 'balloon';
+            balloon.textContent = balloonColors[i];
+            const string = document.createElement('div');
+            string.className = 'string';
+            wrapper.appendChild(balloon);
+            wrapper.appendChild(string);
+            document.body.appendChild(wrapper);
+        }
+
+        // ========== نامه (پاکت نامه) ==========
+        const modal = document.getElementById('letterModal');
+        const envelopeBtn = document.getElementById('envelopeBtn');
+        const closeLetter = document.getElementById('closeLetter');
+
+        envelopeBtn.addEventListener('click', () => {
+            modal.classList.add('show');
+        });
+
+        closeLetter.addEventListener('click', () => {
+            modal.classList.remove('show');
+        });
+
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) modal.classList.remove('show');
+        });
+
+        // ========== ثانیه‌شمار معکوس ==========
+        const targetDate = new Date(2030, 7, 20);
+
+        function updateCountdown() {
+            const now = new Date();
+            const diff = targetDate - now;
+
+            if (diff <= 0) {
+                document.getElementById('countdown').innerHTML =
+                    '<span class="countdown-item">🎉 امروز روز خاصه! 🎉</span>';
+                return;
+            }
+
+            const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((diff % (86400000)) / (3600000));
+            const minutes = Math.floor((diff % 3600000) / 60000);
+            const seconds = Math.floor((diff % 60000) / 1000);
+
+            document.getElementById('days').textContent = String(days).padStart(2, '0');
+            document.getElementById('hours').textContent = String(hours).padStart(2, '0');
+            document.getElementById('minutes').textContent = String(minutes).padStart(2, '0');
+            document.getElementById('seconds').textContent = String(seconds).padStart(2, '0');
+        }
+
+        setInterval(updateCountdown, 1000);
+        updateCountdown();
+
+        // ========== نوار ناوبری ==========
+        const currentPage = 1;
+        const pages = [
+            'First-page.html',
+            'page2.html',
+            'page3.html',
+            'page4.html',
+            'page5.html',
+        ];
+
+        function goToPage(pageNum) {
+            if (pageNum >= 1 && pageNum <= pages.length) {
+                document.body.style.transition = 'opacity 0.4s';
+                document.body.style.opacity = '0';
+                setTimeout(() => {
+                    window.location.href = pages[pageNum - 1];
+                }, 400);
+            }
+        }
+
+        document.getElementById('prevPage').addEventListener('click', () => {
+            if (currentPage < 6) goToPage(currentPage + 1);
+        });
+
+        document.getElementById('nextPage').addEventListener('click', () => {
+            if (currentPage > 1) goToPage(currentPage - 1);
+        });
+
+        document.querySelectorAll('.dot').forEach(dot => {
+            dot.addEventListener('click', () => {
+                const pageNum = parseInt(dot.dataset.page);
+                if (pageNum !== currentPage) goToPage(pageNum);
+            });
+        });
+    </script>
+</body>
+
+</html>
