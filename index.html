@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <title>ورود</title>
+    <style>
+        /* جلوگیری از هرگونه اسکرول */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html,
+        body {
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+        }
+
+        body {
+            font-family: 'Tahoma', sans-serif;
+            background-color: #000;
+            direction: rtl;
+            opacity: 0;
+            animation: pageFadeIn 2s ease-in-out forwards;
+        }
+
+        /* ستاره‌های پس‌زمینه */
+        .stars {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: transparent;
+            z-index: 0;
+            overflow: hidden;
+        }
+
+        .star {
+            position: absolute;
+            background: #FFF;
+            border-radius: 50%;
+            box-shadow: 0 0 8px #FFF, 0 0 15px #FFF, 0 0 25px #FFF, 0 0 35px #00FFFF, 0 0 45px #00FFFF;
+            animation: twinkle linear infinite;
+        }
+
+        @keyframes twinkle {
+
+            0%,
+            100% {
+                opacity: 0.9;
+            }
+
+            50% {
+                opacity: 0.3;
+            }
+        }
+
+        @keyframes fadeOut {
+            from {
+                opacity: 1;
+                transform: translateY(0);
+            }
+
+            to {
+                opacity: 0;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes welcomeMessageFadeInText {
+            from {
+                opacity: 0;
+                transform: translateY(0);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes pageFadeIn {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+
+        /* کانتینر اصلی */
+        .main-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 2;
+        }
+
+        /* دایره مرکزی */
+        .welcome-element {
+            width: 250px;
+            height: 250px;
+            background-color: rgb(0, 0, 0);
+            border-radius: 50%;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 1;
+            box-shadow: 0 0 60px 100px rgba(0, 0, 0, 0.8);
+        }
+
+        /* کانتینر متن */
+        .welcome-container {
+            z-index: 3;
+            text-align: center;
+            padding: 20px;
+            box-sizing: border-box;
+            position: relative;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #ffffff;
+        }
+
+        /* پس‌زمینه متن */
+        .text-background {
+            background-color: transparent;
+            padding: 0;
+            border-radius: 10px;
+            display: inline-block;
+            opacity: 1;
+            line-height: 1.7;
+            animation-fill-mode: forwards;
+            animation: welcomeMessageFadeInText 1.5s ease-in-out 0.5s forwards;
+            font-size: 1.1em;
+        }
+
+        /* پیام خوش‌آمدگویی */
+        /* پیام خوش‌آمدگویی */
+        #welcome-message {
+            margin: 0;
+            opacity: 0;
+            animation-fill-mode: forwards;
+            padding: 15px 30px;
+            font-size: 2.2em;
+        }
+
+        @media (max-width: 768px) {
+            .welcome-element {
+                width: 200px;
+                height: 200px;
+            }
+
+            #welcome-message {
+                font-size: 1.7em;
+                padding: 15px 30px;
+            }
+
+            .welcome-container {
+                padding: 10px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="stars"></div>
+    <div class="main-container">
+        <div class="welcome-element"></div>
+        <div class="welcome-container">
+            <div class="text-background">
+                <p id="welcome-message"></p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        /* تنظیمات انیمیشن متن */
+        const fadeDuration = 800;
+        const fadeInDelay = 450;
+        const textDisplayTime = 5000;
+
+        const welcomeMessageElement = document.getElementById('welcome-message');
+
+        const welcomeTexts = [
+            "الزایمر درد نیست،برای بعضیا درمان است..!",
+            "عشق نمی‌میرد؛ولی<br>عاشق چرا...🥀",
+            "بالاخره امروز رسید...🌖",
+            "امیدوارم لذت ببری...❤️"
+        ];
+        let currentTextIndex = 0;
+        let textIntervalId;
+
+               function showNextText() {
+            welcomeMessageElement.style.animation = `fadeOut ${fadeDuration}ms forwards`;
+
+            setTimeout(() => {
+                currentTextIndex++;
+                if (currentTextIndex < welcomeTexts.length) {
+                    welcomeMessageElement.innerHTML = welcomeTexts[currentTextIndex];
+                    welcomeMessageElement.style.animation = 'none';
+                    requestAnimationFrame(() => {
+                        welcomeMessageElement.style.animation = `welcomeMessageFadeInText ${fadeDuration}ms ease-in-out ${fadeInDelay}ms forwards`;
+                    });
+                } else {
+                    clearInterval(textIntervalId);
+                    
+                    // محو شدن همه چیز: متن، دایره، ستاره‌ها
+                    const welcomeContainer = document.querySelector('.welcome-container');
+                    const welcomeElement = document.querySelector('.welcome-element');
+                    const starsContainer = document.querySelector('.stars');
+                    
+                    welcomeContainer.style.transition = 'opacity 0.8s ease-out';
+                    welcomeContainer.style.opacity = '0';
+                    
+                    welcomeElement.style.transition = 'opacity 0.8s ease-out';
+                    welcomeElement.style.opacity = '0';
+                    
+                    starsContainer.style.transition = 'opacity 0.8s ease-out';
+                    starsContainer.style.opacity = '0';
+                    
+                    // بعد از محو شدن کامل، برو به صفحه راهنما
+                    setTimeout(() => {
+                        window.location.href = "guide.html";
+                    }, 1000);
+                }
+            }, fadeDuration);
+        }
+
+        // ========== تنظیم ستاره‌ها ==========
+        function setupStars() {
+            const starsContainer = document.querySelector('.stars');
+            const numberOfStars = 125;
+            starsContainer.innerHTML = '';
+            for (let i = 0; i < numberOfStars; i++) {
+                const star = document.createElement('div');
+                star.classList.add('star');
+                star.style.top = `${Math.random() * 100}%`;
+                star.style.left = `${Math.random() * 100}%`;
+                const minSize = 1.5;
+                const maxSize = 4;
+                const starSize = Math.random() * (maxSize - minSize) + minSize;
+                star.style.width = `${starSize}px`;
+                star.style.height = `${starSize}px`;
+                const twinkleDuration = Math.random() * 3 + 1;
+                star.style.animationDuration = `${twinkleDuration}s`;
+                starsContainer.appendChild(star);
+            }
+        }
+
+        // ========== اجرای اولیه ==========
+        document.addEventListener('DOMContentLoaded', () => {
+            setupStars();
+            window.addEventListener('resize', setupStars);
+
+            welcomeMessageElement.innerHTML = welcomeTexts[currentTextIndex];
+            requestAnimationFrame(() => {
+                welcomeMessageElement.style.animation =
+                    `welcomeMessageFadeInText 1.5s ease-in-out 0.5s forwards`;
+            });
+
+            textIntervalId = setInterval(showNextText, textDisplayTime + fadeDuration);
+        });
+    </script>
+</body>
+
+</html>
